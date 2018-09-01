@@ -65,3 +65,20 @@ if (file.exists(tidypath)) {
   file.edit(wdpath)
   }
 }
+
+
+#
+#
+# Get Stars from P-Values
+#
+#
+
+get_stars <- function (pval) {
+  dplyr::case_when(
+    is.na(pval) ~ "", 
+    pval < 0.001 ~ "***", 
+    pval < 0.01 ~ "**", 
+    pval < 0.05 ~ "*", 
+    pval < 0.10 ~ "^", 
+    TRUE ~ "")
+}

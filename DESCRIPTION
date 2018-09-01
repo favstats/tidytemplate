@@ -8,3 +8,10 @@ Description: This package contains an .Rmd template and a few helper function.
 License: Free
 Encoding: UTF-8
 LazyData: true
+Imports:
+    dplyr,
+    ggplot2,
+    rgdal,
+    purrr,
+    httr,
+    labelled
