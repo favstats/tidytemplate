@@ -1,0 +1,10 @@
+Package: tidytemplate
+Type: Package
+Title: This is a package that mostly use for personal reasons
+Version: 0.1.0
+Author: Fabio
+Maintainer: Fabio <fabio.votta@gmail.com>
+Description: This package contains an .Rmd template and a few helper function.
+License: Free
+Encoding: UTF-8
+LazyData: true
