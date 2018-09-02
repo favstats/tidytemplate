@@ -5,6 +5,8 @@
 
 get_pew_world <- function() {
   
+  tidytemplate::data_dir()
+  
   # this ensures you only download the shapefile once and hides
   # errors and warnings. remove `try` and `invisible` to see messages
   try(invisible(httr::GET("http://www.pewglobal.org/wp-content/lib/js/world-geo.json",
@@ -14,7 +16,7 @@ get_pew_world <- function() {
   # layer info to use in the call to readOGR
   #ogrListLayers("world-geo.json")
   world <- rgdal::readOGR("data/world-geo.json")
-  world_wt <- rgdal::spTransform(world, CRS("+proj=robin"))
+  world_wt <- sp::spTransform(world, sp::CRS("+proj=robin"))
   world_map <- ggplot2::fortify(world_wt)
   
   world_map <- world_map %>%
