@@ -22,7 +22,6 @@ save_it <- function(x){
     dir.create("data")
   }
   save(x, file = paste0("data/", deparse(substitute(x)), ".Rdata"))
-  paste0(cat("Saved at:\n", paste0("data/", as.name(x), ".Rdata")))
 }
 
 #
