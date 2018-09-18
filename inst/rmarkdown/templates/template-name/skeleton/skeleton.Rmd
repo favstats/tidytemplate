@@ -2,7 +2,7 @@
 title: "Tidy Template"
 author: "Fabio Votta"
 date: "The Date"
-output: html_output
+output: html_document
 ---
 
 This script is about:
@@ -41,3 +41,6 @@ pacman::p_load(tidyverse)
 
 ```
 
+
+
+## Conclusion

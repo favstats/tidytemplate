@@ -22,6 +22,7 @@ save_it <- function(x){
     dir.create("data")
   }
   save(x, file = paste0("data/", deparse(substitute(x)), ".Rdata"))
+  paste0(cat("Saved at:\n", paste0("data/", as.name(x), ".Rdata")))
 }
 
 #
@@ -81,4 +82,68 @@ get_stars <- function (pval) {
     pval < 0.05 ~ "*", 
     pval < 0.10 ~ "^", 
     TRUE ~ "")
+}
+
+
+
+#
+#
+# Get Labels from P-Values
+#
+#
+
+get_plabs <- function (pval) {
+  dplyr::case_when(is.na(pval) ~ "", 
+                   pval < 0.001 ~ "p < 0.001",
+                   pval < 0.01 ~ "p < 0.01", 
+                   pval < 0.05 ~ "p < 0.05", 
+                   pval < 0.1 ~ "p < 0.10", 
+                   TRUE ~ "p > 0.10")
+}
+
+#
+#
+# Get percentage helper function
+#
+#
+
+get_percentage <- function(part, total, digits = NULL) {
+  
+  if(!is.numeric(part) | !is.numeric(total)){
+    cat("Non-numeric variables.. converting\n")
+    part <- as.numeric(part)
+    total <- as.numeric(total)
+  }
+  val <- part / total * 100
+  if(!is.null(digits)){
+    val <- round(val, digits)
+  }
+  return(val) 
+}
+
+#
+#
+# Get R Squared with percentage (broom)
+#
+#
+
+
+get_r2_label <- function(mod, digits = 3, adj = F){
+  if(!adj){#
+    message("R Squared\n")
+    r2 <- broom::glance(mod) %>%
+      mutate(r.squared = r.squared * 100) %>% 
+      .$r.squared %>% 
+      format(., digits = digits) %>% 
+      paste0(., "%")
+    return(r2)
+  } else {
+    message("Getting Adjusted R Squared\n")
+    r2 <- broom::glance(mod) %>%
+      mutate(adj.r.squared = adj.r.squared * 100) %>% 
+      .$adj.r.squared %>% 
+      format(., digits = digits) %>% 
+      paste0(., "%")    
+    return(r2)
+  }
 }
