@@ -1,7 +1,7 @@
-#
-# Get World Map Data
-#
-#
+#'
+#' Get World Map Data
+#'
+#'
 
 get_pew_world <- function() {
   

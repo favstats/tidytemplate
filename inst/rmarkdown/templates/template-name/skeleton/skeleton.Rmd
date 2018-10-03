@@ -12,11 +12,11 @@ This script is about:
 ## Packages and Folders
 
 ```{r}
-# Install these packages if you don't have theme yet
+# Install these packages if you don't have them yet
+# if (!require("pacman")) install.packages("pacman")
 # devtools::install_github("favstats/tidytemplate")
-# install.packages("pacman")
 
-pacman::p_load(tidyverse)
+pacman::p_load(tidyverse, tidytemplate)
 
 # Creates folders
 # tidytemplate::data_dir()

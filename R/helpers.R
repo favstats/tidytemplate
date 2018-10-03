@@ -1,8 +1,8 @@
-#
-# This function saves a ggplot with the same name as the object.
-#
-#
-#
+#'
+#' This function saves a ggplot with the same name as the object.
+#'
+#'
+#' @export
 
 ggsave_it <- function(x, plot = ggplot2::last_plot(), ...){
   if(!dir.exists("images")){
@@ -11,46 +11,46 @@ ggsave_it <- function(x, plot = ggplot2::last_plot(), ...){
   ggplot2::ggsave(filename = paste0("images/", deparse(substitute(x)), ".png"), plot = plot, ...)
 }
 
-#
-# This function saves a dataset with the same name as the object.
-#
-#
-#
+#'
+#' This function saves a dataset with the same name as the object.
+#'
+#'
+#' @export
 
 save_it <- function(x){
   if(!dir.exists("data")){
     dir.create("data")
   }
-  save(x, file = paste0("data/", deparse(substitute(x)), ".Rdata"))
+  save(x, file = paste0("data/", lazyeval::expr_find(x), ".Rdata"))
 }
 
-#
-# This function loads a dataset with the same name as the object.
-#
-#
-#
+#'
+#' This function loads a dataset with the same name as the object.
+#'
+#'
+#' @export
 
 load_it <- function(x) {
   get(load(x))
 }
 
 
-#
-# This function standardizes a variable from 0 to 1.
-#
-#
-#
+#'
+#' This function standardizes a variable from 0 to 1.
+#'
+#'
+#' @export
 
 range01 <- function(x){
   (x - min(x, na.rm = T)) / (max(x, na.rm = T) - min(x, na.rm = T))
 }
 
 
-#
-# This function creates a tidy template.
-#
-#
-#
+#'
+#' This function creates a tidy template.
+#'
+#'
+#' @export
 
 open_template <- function(filename = "Untitled1") {
 
@@ -67,11 +67,11 @@ if (file.exists(tidypath)) {
 }
 
 
-#
-#
-# Get Stars from P-Values
-#
-#
+#'
+#'
+#' Get Stars from P-Values
+#'
+#' @export
 
 get_stars <- function (pval) {
   dplyr::case_when(
@@ -85,11 +85,11 @@ get_stars <- function (pval) {
 
 
 
-#
-#
-# Get Labels from P-Values
-#
-#
+#'
+#'
+#' Get Labels from P-Values
+#'
+#' @export
 
 get_plabs <- function (pval) {
   dplyr::case_when(is.na(pval) ~ "", 
@@ -100,11 +100,11 @@ get_plabs <- function (pval) {
                    TRUE ~ "p > 0.10")
 }
 
-#
-#
-# Get percentage helper function
-#
-#
+#'
+#'
+#' Get percentage helper function
+#'
+#' @export
 
 get_percentage <- function(part, total, digits = NULL) {
   
@@ -120,15 +120,15 @@ get_percentage <- function(part, total, digits = NULL) {
   return(val) 
 }
 
-#
-#
-# Get R Squared with percentage (broom)
-#
-#
+#'
+#'
+#' Get R Squared with percentage (broom)
+#'
+#' @export
 
 
 get_r2_label <- function(mod, digits = 3, adj = F){
-  if(!adj){#
+  if(!adj){#'
     message("R Squared\n")
     r2 <- broom::glance(mod) %>%
       mutate(r.squared = r.squared * 100) %>% 
