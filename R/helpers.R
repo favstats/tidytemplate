@@ -146,3 +146,39 @@ get_r2_label <- function(mod, digits = 3, adj = F){
     return(r2)
   }
 }
+
+
+#'
+#'
+#' Identify an SEM Model
+#'
+#' @export
+
+identify <- function(fit, var_number = NULL, parameters = NULL) {
+  
+  if (is.null(var_number) & is.null(parameters)) { 
+    
+    parameters <- parameterestimates(fit) %>% 
+      select(pvalue) %>% 
+      na.omit %>% 
+      nrow()
+    
+    var_number <- lavaan::lav_partable_independence(fit) %>% 
+      .$lhs %>% 
+      length()
+  }
+  
+  p <- var_number*(var_number + 1)/2
+  i <- p - parameters
+  cat(paste0("\n Total Number of Datapoints: ", p))
+  if (i > 0) {
+    cat("\n Modell ist überidentifiziert \n")
+  } 
+  if (i == 0) {
+    cat("\n Modell ist identifiziert \n")
+  } 
+  if (i < 0) {
+    message("\n Modell ist unteridentifiziert \n")
+  } 
+  return(list(p = p, i = i))
+}
