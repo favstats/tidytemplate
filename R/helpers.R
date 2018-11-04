@@ -208,7 +208,7 @@ identify <- function(fit, var_number = NULL, parameters = NULL) {
 
 tbl_std <- function(model, type = "text", ...) {
   #Standardized betas
-  suppressWarnings(suppressMessages(model1.beta <- lm.beta(model)))
+  model1.beta <- suppressWarnings(suppressMessages(lm.beta(model)))
   #print
   #model1.beta$standardized.coefficients[1] <- NA
   #coef(summary(model1.beta))[, "Std. Error"]  <- NA
