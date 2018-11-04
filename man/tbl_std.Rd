@@ -28,5 +28,5 @@ df<-data.frame(var1, var2, var3, var4)
 #model with unstandardized betas
 model1<-lm(var1~var2+var3+var4, data=df)
 
-tbl_std(model1, type = "text")
+tbl_std(model1)
 }
