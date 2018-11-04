@@ -203,7 +203,7 @@ identify <- function(fit, var_number = NULL, parameters = NULL) {
 #' #model with unstandardized betas
 #' model1<-lm(var1~var2+var3+var4, data=df)
 #'
-#' tbl_std(model1, type = "text")
+#' tbl_std(model1)
 #' @export
 
 tbl_std <- function(model, type = "text", ...) {
@@ -213,8 +213,8 @@ tbl_std <- function(model, type = "text", ...) {
   #model1.beta$standardized.coefficients[1] <- NA
   #coef(summary(model1.beta))[, "Std. Error"]  <- NA
   
-  suppressWarnings(suppressMessages(stargazer(model, model1.beta,
-            coef = list(model$coefficients, type = type,
+  suppressWarnings(suppressMessages(stargazer(model, model1.beta, type = type,
+            coef = list(model$coefficients, 
                         model1.beta$standardized.coefficients),
             column.labels = c("b", "std.b"), table.placement = "ht!",
             header = F, ...)))
