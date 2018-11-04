@@ -206,16 +206,16 @@ identify <- function(fit, var_number = NULL, parameters = NULL) {
 #' tbl_std(model1, type = "text")
 #' @export
 
-tbl_std <- function(model, ...) {
+tbl_std <- function(model, type = "text", ...) {
   #Standardized betas
-  model1.beta <- lm.beta(model)
+  suppressWarnings(suppressMessages(model1.beta <- lm.beta(model)))
   #print
   #model1.beta$standardized.coefficients[1] <- NA
   #coef(summary(model1.beta))[, "Std. Error"]  <- NA
   
-  stargazer(model, model1.beta,
-            coef = list(model$coefficients,
+  suppressWarnings(suppressMessages(stargazer(model, model1.beta,
+            coef = list(model$coefficients, type = type,
                         model1.beta$standardized.coefficients),
             column.labels = c("b", "std.b"), table.placement = "ht!",
-            header = F, ...)
+            header = F, ...)))
 }
