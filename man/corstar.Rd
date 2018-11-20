@@ -7,11 +7,14 @@
 corstar(x, y = NULL, use = "pairwise", method = "pearson", round = 3,
   row.labels, col.labels, ...)
 }
+\arguments{
+\item{x}{dataframe}
+}
 \description{
 This function allows you to create a correlation table with significance tables.
 }
 \examples{
-corstar()
+corstar(cars)
 }
 \keyword{correlation}
 \keyword{table}

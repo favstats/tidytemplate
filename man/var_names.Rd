@@ -6,11 +6,16 @@
 \usage{
 var_names(data, keyword = "")
 }
+\arguments{
+\item{data}{is a labelled dataframe}
+
+\item{keyword}{what do you want to search for?}
+}
 \description{
 This function allows you to find variables and their coding.
 Only works with SPSS data loaded with haven.
 }
 \examples{
-var_names()
+var_names(a_labelled_dataset)
 }
 \keyword{searcher}

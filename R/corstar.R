@@ -1,11 +1,11 @@
 #' A correlation table with stars
 #'
 #' This function allows you to create a correlation table with significance tables.
-#' @param
+#' @param x dataframe
 #' @keywords correlation table
 #' @export
 #' @examples
-#' corstar()
+#' corstar(cars)
 
 corstar <- function(x, y = NULL, use = "pairwise", method = "pearson", round = 3, row.labels, col.labels, ...) {
   

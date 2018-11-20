@@ -2,11 +2,12 @@
 #'
 #' This function allows you to find variables and their coding.
 #' Only works with SPSS data loaded with haven.
-#' @param
+#' @param data is a labelled dataframe
+#' @param keyword what do you want to search for?
 #' @keywords searcher
 #' @export
 #' @examples
-#' var_names()
+#' var_names(a_labelled_dataset)
 
 #lubripack::lubripack("tidyverse","labelled","haven","sjmisc","magrittr")
 

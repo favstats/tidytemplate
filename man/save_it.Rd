@@ -2,10 +2,10 @@
 % Please edit documentation in R/helpers.R
 \name{save_it}
 \alias{save_it}
-\title{This function saves a dataset with the same name as the object.}
+\title{This function saves a ggplot with the same name as the object.}
 \usage{
 save_it(x)
 }
 \description{
-This function saves a dataset with the same name as the object.
+This function saves a ggplot with the same name as the object.
 }

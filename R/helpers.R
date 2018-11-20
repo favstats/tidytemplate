@@ -12,7 +12,7 @@ ggsave_it <- function(x, plot = ggplot2::last_plot(), ...){
 }
 
 #'
-#' This function saves a dataset with the same name as the object.
+#' This function saves a ggplot with the same name as the object.
 #'
 #'
 #' @export
@@ -219,3 +219,35 @@ tbl_std <- function(model, type = "text", ...) {
             column.labels = c("b", "std.b"), table.placement = "ht!",
             header = F, ...)))
 }
+
+
+
+
+
+
+#' Get Percentages and Frequencies
+#'
+#' This is a function that can be used in a pipe-workfolow
+#' in order to get grouped frequencies and percentages
+#'
+#'
+#' @param x add in all grouping variables
+#'
+#' @return returns a dataframe with percentages and frequencies
+#' @examples
+#'
+#' iris %>% 
+#'   freqs(Species)
+#' 
+#' @export
+
+freqs <- function(x, ...) {
+  g <- group_vars(x)
+  x <- group_by(x, ..., add = T)
+  x <- summarize(x, n = n())
+  x <- mutate(x, freq = n / sum(n))
+  x <- ungroup(x)
+  x <- complete(x, ..., fill = list(n = 0, freq = 0))
+  grouped_df(x, g)
+}
+
