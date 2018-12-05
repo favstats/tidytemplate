@@ -251,3 +251,84 @@ freqs <- function(x, ...) {
   grouped_df(x, g)
 }
 
+
+#' Get Tidy Estimates
+#'
+#'
+#' 
+#' @export
+#' 
+tidy_wide <- function(model) {
+  model_wide <- tidy(model) %>% # tidy extrahiert die Parameter
+    select(term, estimate) %>%    # wir brauchen nur die logit-koeffs
+    spread(term, estimate) %>%    # konvertieren in wide format
+    rename(intercept = `(Intercept)`) # umbenennen
+  return(model_wide)            # gib model_wide aus
+}
+
+
+#' Get Tidy Estimates
+#'
+#'
+#' 
+#' @export
+#' 
+tidy_wide <- function(model) {
+  model_wide <- tidy(model) %>% # tidy extrahiert die Parameter
+    select(term, estimate) %>%    # wir brauchen nur die logit-koeffs
+    spread(term, estimate) %>%    # konvertieren in wide format
+    rename(intercept = `(Intercept)`) # umbenennen
+  return(model_wide)            # gib model_wide aus
+}
+
+#' Turns logits to probability
+#'
+#'
+#' 
+#' @export
+#' 
+logit2prob <- function(logit) { # logit ist der input
+  odds <- exp(logit)          # e hoch logit = odds
+  prob <- odds / (1 + odds)   # odds / 1 + odds = Wahrscheinlichkeit
+  return(prob)               # gibt Wahrscheinlichkeit zurück
+}
+
+#' Turns logits to probability
+#'
+#'
+#' 
+#' @export
+#' 
+logit2prob <- function(logit) { # logit ist der input
+  odds <- exp(logit)          # e hoch logit = odds
+  prob <- odds / (1 + odds)   # odds / 1 + odds = Wahrscheinlichkeit
+  return(prob)               # gibt Wahrscheinlichkeit zurück
+}
+
+
+#' Plot Average Marginal Effect Coefficient Plot
+#'
+#'
+#' 
+#' @export
+#' 
+plot_ame <- function(mod1) {
+  
+  model_dat <- margins(mod1) %>% summary()
+  
+  model_dat %>%
+    mutate(AME = AME * 100) %>% 
+    mutate(lower = lower * 100) %>%
+    mutate(upper = upper * 100) %>% 
+    mutate(stars = tidytemplate::get_stars(p)) %>% 
+    mutate(AME_label = round(AME, 2)) %>% 
+    mutate(AME_label = paste0(AME_label, stars)) %>% 
+    ggplot() +
+    geom_point(aes(factor, AME)) +
+    geom_errorbar(aes(x = factor, ymin = lower, ymax = upper), width = 0) +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "darkgrey", alpha = 0.75) +
+    geom_text(aes(factor, AME, label = AME_label), nudge_y = 0.6, nudge_x = 0.1) +
+    theme_minimal() +
+    coord_flip() +
+    labs(x = "", y = "Average Marginal Effect (AME)", title = "Average Marginal Effects Plot")
+}
