@@ -4,8 +4,8 @@
 \alias{corstar}
 \title{A correlation table with stars}
 \usage{
-corstar(x, y = NULL, use = "pairwise", method = "pearson", round = 3,
-  row.labels, col.labels, ...)
+corstar(x, y = NULL, use = "pairwise", method = "pearson",
+  round = 3, row.labels, col.labels, ...)
 }
 \arguments{
 \item{x}{dataframe}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/helpers.R
 \name{logit2prob}
 \alias{logit2prob}
-\alias{logit2prob}
 \title{Turns logits to probability}
 \usage{
 logit2prob(logit)

@@ -2,7 +2,6 @@
 % Please edit documentation in R/helpers.R
 \name{tidy_wide}
 \alias{tidy_wide}
-\alias{tidy_wide}
 \title{Get Tidy Estimates}
 \usage{
 tidy_wide(model)

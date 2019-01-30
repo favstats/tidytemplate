@@ -327,7 +327,7 @@ plot_ame <- function(mod1) {
     geom_point(aes(factor, AME)) +
     geom_errorbar(aes(x = factor, ymin = lower, ymax = upper), width = 0) +
     geom_hline(yintercept = 0, linetype = "dashed", color = "darkgrey", alpha = 0.75) +
-    geom_text(aes(factor, AME, label = AME_label), nudge_y = 0.6, nudge_x = 0.1) +
+    geom_text(aes(factor, AME, label = AME_label), nudge_y = 0.05, nudge_x = 0.1) +
     theme_minimal() +
     coord_flip() +
     labs(x = "", y = "Average Marginal Effect (AME)", title = "Average Marginal Effects Plot")
