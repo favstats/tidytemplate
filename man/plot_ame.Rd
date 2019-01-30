@@ -4,7 +4,7 @@
 \alias{plot_ame}
 \title{Plot Average Marginal Effect Coefficient Plot}
 \usage{
-plot_ame(mod1)
+plot_ame(mod1, nudge_y = 0.05, nudge_x = 0.1)
 }
 \description{
 Plot Average Marginal Effect Coefficient Plot
