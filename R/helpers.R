@@ -332,3 +332,57 @@ plot_ame <- function(mod1, nudge_y = 0.05, nudge_x = 0.1) {
     coord_flip() +
     labs(x = "", y = "Average Marginal Effect (AME)", title = "Average Marginal Effects Plot")
 }
+
+
+
+#' Parse UTC Date
+#'
+#'
+#' 
+#' @export
+#' 
+parse_utc_date <- function(date) {
+  str_extract(date,"\\d{4}-\\d{2}-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}....Z") %>% as_date
+}
+
+#' T-Test Report
+#'
+#'
+#' 
+#' @export
+#' 
+t.report <- function(tt){
+  tvalue <- tt$statistic %>% formatC(digits = 2, format = "f")
+  pvalue <- tt$p.value %>% formatC(digits = 2, format = "f")
+  # if (round(tt$parameter, 0) == tt$parameter) {
+  df <- tt$parameter
+  # } else {
+  # df <- formatC(digits = 2, format = "f")
+  # }
+  if (tt$p.value < 0.0005) {
+    pvalue <- " < 0.001" 
+  } else { 
+    if (tt$p.value < 0.005) {
+      pvalue <- paste0(" = ",tt$p.value %>% formatC(digits = 3, format = "f"))
+    } else {
+      pvalue <- paste0(" = ",tt$p.value %>% formatC(digits = 2, format = "f"))
+    }
+  } 
+  paste0("t-test: V",df," = ",tvalue, ", p", pvalue)
+}
+
+#' Cohen's Report
+#'
+#'
+#' 
+#' @export
+#' 
+cohen_d_report <- function(res_cohen) {
+  cohen_d <- res_cohen$estimate %>% formatC(digits = 2, format = "f")
+  cohen_lower <- res_cohen$conf.int[1] %>% formatC(digits = 2, format = "f")
+  cohen_upper <- res_cohen$conf.int[2] %>% formatC(digits = 2, format = "f")
+  cohen_size <- res_cohen$magnitude
+  
+  paste0("Cohen's d = ", cohen_d, " [", cohen_lower, "-", cohen_upper, "]; ", 
+         "Effect Size: '", res_cohen$magnitude, "'")
+}
