@@ -18,10 +18,10 @@ ggsave_it <- function(x, plot = ggplot2::last_plot(), ...){
 #' @export
 
 save_it <- function(x){
-  if(!dir.exists("data")){
+  if (!dir.exists("data")) {
     dir.create("data")
   }
-  save(x, file = paste0("data/", lazyeval::expr_find(x), ".Rdata"))
+  saveRDS(x, file = paste0("data/", lazyeval::expr_find(x), ".RDS"))
 }
 
 #'
